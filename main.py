@@ -32,7 +32,7 @@ def main():
             # Handle empty file case
             print("The file is empty.")
 
-        st.dataframe(st_df, use_container_width=True, hide_index=True)
+        st.dataframe(st_df, use_container_width=True, hide_index=True, height=220)
 
         agent = create_csv_agent(
             OpenAI(temperature=0), csv_file, verbose=True)
