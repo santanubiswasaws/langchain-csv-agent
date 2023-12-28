@@ -45,6 +45,8 @@ def main():
                 #st.write(agent.run(user_question))
                 #print(answer)
                 st.write(answer)
+            
+                print(agent.json(user_question))
 
 
 
