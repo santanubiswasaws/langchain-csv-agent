@@ -33,7 +33,7 @@ def main():
             print("The file is empty.")
 
         # Pivot the DataFrame
-        st_df_pivot = st_df.pivot(index='CUSTOMER_ID', columns='MONTH', values= 'MONTHLY_REVENUE').round(2)
+        st_df_pivot = st_df.pivot(index='CUSTOMER_ID', columns='MONTH', values= 'MONTHLY_REVENUE').round(0)
 
         # 
         row_totals = st_df_pivot.sum(axis=1)
