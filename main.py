@@ -33,7 +33,7 @@ def main():
             print("The file is empty.")
 
         # Pivot the DataFrame
-        st_df_pivot = st_df.pivot(index='CUSTOMER_ID', columns='MONTH', values= 'MONTHLY_REVENUE').round(0)
+        st_df_pivot = st_df.pivot(index='CUSTOMER_ID', columns='MONTH', values= 'MONTHLY_REVENUE')
 
         # 
         row_totals = st_df_pivot.sum(axis=1)
@@ -48,6 +48,8 @@ def main():
 
         # Concatenate the original DataFrame with the totals DataFrame
         st_df_pivoted_with_totals = pd.concat([st_df_pivot, totals_df])
+
+        st_df_pivoted_with_totals = st_df_pivoted_with_totals.round(0)
 
 
 
