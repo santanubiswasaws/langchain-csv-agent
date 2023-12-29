@@ -17,7 +17,7 @@ def main():
     else:
         print("OPENAI_API_KEY is set")
 
-    st.set_page_config(page_title="Ask your CSV")
+    st.set_page_config(page_title="Ask your CSV", layout='wide')
     st.header("Ask your CSV 📈")
 
     csv_file = st.file_uploader("Upload a CSV file", type="csv")
@@ -32,7 +32,29 @@ def main():
             # Handle empty file case
             print("The file is empty.")
 
-        st.dataframe(st_df, use_container_width=True, hide_index=True, height=220)
+        # Pivot the DataFrame
+        st_df_pivot = st_df.pivot(index='CUSTOMER_ID', columns='MONTH', values= 'MONTHLY_REVENUE').round()
+
+        # 
+        row_totals = st_df_pivot.sum(axis=1)
+
+        # Add the row totals as the first column
+        st_df_pivot.insert(0, 'Customer_Totals', row_totals)
+
+        column_totals = st_df_pivot.sum(axis=0)
+
+        # Create a new DataFrame with the column totals
+        totals_df = pd.DataFrame(column_totals.values.reshape(1, -1), columns=st_df_pivot.columns, index=['Totals'])
+
+        # Concatenate the original DataFrame with the totals DataFrame
+        st_df_pivoted_with_totals = pd.concat([st_df_pivot, totals_df])
+
+
+
+        # st.dataframe(st_df, use_container_width=True, hide_index=True, height=220)
+        st.dataframe(st_df, hide_index=True, height=220)
+        st.dataframe(st_df_pivoted_with_totals, use_container_width=True)
+
 
         agent = create_csv_agent(
             OpenAI(temperature=0), csv_file, verbose=True)
@@ -46,7 +68,6 @@ def main():
                 #print(answer)
                 st.write(answer)
             
-                print(agent.json(user_question))
 
 
 
