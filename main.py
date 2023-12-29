@@ -46,7 +46,7 @@ def main():
         st_df_pivot.insert(0, 'Customer_Totals', row_totals)
         column_totals = st_df_pivot.sum(axis=0)
         # Create a new DataFrame with the column totals
-        totals_df = pd.DataFrame(column_totals.values.reshape(1, -1), columns=st_df_pivot.columns, index=['Totals'])
+        totals_df = pd.DataFrame(column_totals.values.reshape(1, -1), columns=st_df_pivot.columns, index=['Recurring Revenue (MRR)'])
         # Concatenate the original DataFrame with the totals DataFrame
         st_df_pivoted_with_totals = pd.concat([st_df_pivot, totals_df])
 
@@ -83,14 +83,18 @@ def main():
 
 
         # st.dataframe(st_df, use_container_width=True, hide_index=True, height=220)
+
+        st.subheader('Content of uploaded file', divider='blue')
         st.dataframe(st_df, hide_index=True, height=300, use_container_width=True)
+
+        st.subheader('ARR Analysis - Scroll down to see New Business, Up Sell, Down Sell and Churn', divider='green') 
         st.dataframe(st_df_pivoted_with_totals, use_container_width=True)
 
 
         agent = create_csv_agent(
             OpenAI(temperature=0), csv_file, verbose=True)
 
-        user_question = st.text_input("Ask a question about your CSV: ")
+        user_question = st.text_input("Ask a question about your data: ")
 
         if user_question is not None and user_question != "":
             with st.spinner(text="In progress..."):
