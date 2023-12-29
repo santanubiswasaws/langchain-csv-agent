@@ -35,4 +35,3 @@ This repository is intended for educational purposes only and is not designed to
 
 For any suggestions or improvements related to the tutorial content, please feel free to reach out through the YouTube channel's comment section.
 
-Access the live app [here](https://sb-csv-agent.streamlit.app/)
