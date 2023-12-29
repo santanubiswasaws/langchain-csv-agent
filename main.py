@@ -46,7 +46,7 @@ def main():
         st_df_pivot.insert(0, 'Customer_Totals', row_totals)
         column_totals = st_df_pivot.sum(axis=0)
         # Create a new DataFrame with the column totals
-        totals_df = pd.DataFrame(column_totals.values.reshape(1, -1), columns=st_df_pivot.columns, index=['Recurring Revenue (MRR)'])
+        totals_df = pd.DataFrame(column_totals.values.reshape(1, -1), columns=st_df_pivot.columns, index=['MRR - Recurring Revenue'])
         # Concatenate the original DataFrame with the totals DataFrame
         st_df_pivoted_with_totals = pd.concat([st_df_pivot, totals_df])
 
