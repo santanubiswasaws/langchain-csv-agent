@@ -17,7 +17,7 @@ def main():
     else:
         print("OPENAI_API_KEY is set")
 
-    st.set_page_config(page_title="Ask your CSV", layout='wide')
+    st.set_page_config(page_title="ARR Analysis", layout='wide')
     st.header("Analyse Annual Recurring Revnue (ARR)")
 
     csv_file = st.file_uploader("Upload a CSV file", type="csv")
