@@ -87,6 +87,15 @@ def main():
         st.subheader('Content of uploaded file', divider='blue')
         st.dataframe(st_df, hide_index=True, height=300, use_container_width=True)
 
+
+        # construct the data frame for line plot 
+        #selected_index = ['MRR - Recurring Revenue', 'New Business', 'Up sell', 'Down sell', 'Churn']
+        st.subheader('Aggregated Metrics', divider='blue')
+        df_chart = pd.concat([totals_df, nb_totals_df, upsell_totals_df, downsell_totals_df, churn_totals_df]).round(0)
+        df_chart.drop('Customer_Totals', axis=1, inplace=True)
+        st.dataframe(df_chart)
+        st.line_chart(df_chart.transpose())
+
         st.subheader('ARR Analysis - Scroll down to see New Business, Up Sell, Down Sell and Churn', divider='green') 
         st.dataframe(st_df_pivoted_with_totals, use_container_width=True)
 
